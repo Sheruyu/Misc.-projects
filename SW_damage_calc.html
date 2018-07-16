@@ -1,0 +1,132 @@
+<html>
+
+<style>
+#outerbox {
+    overflow: hidden;
+}
+
+#formbox {
+    width: 500px;
+	padding: 30px;
+    border: 1px solid black;
+    overflow: hidden;
+	position: fixed;
+	left: 20%;
+}
+
+#box1 {
+    display: inline-block;
+	vertical-align: top;
+}
+
+#box2 {
+    display: inline-block;
+	vertical-align: top;
+}
+</style>
+
+<body>
+<div id="outerbox">
+<div id="formbox">
+<p><center>Damage calculator</center></p>
+<!--Damage=TotalAttack*Multiplier*(100%+SkillUp+CritDamage)-->
+<!--DamageReductionFactor=1000/(1140+3.5*Defense)-->
+
+<div id="box1" style="background-color:white">
+  	Base Attack:<br><br>
+	Rune Attack:<br><br>
+	Crit damage %:<br><br>
+	Tower attack %:<br><br>
+	Tower crit damage %:<br><br>
+	Attack multiplier %:<br><br>
+	Skillups %:<br><br>
+	Leaderskill attack %:<br><br>
+	Enemy defense:<br><br><br>
+	Attack buff:<br><br>
+	Defense break:<br><br>
+	Brand:<br><br>
+</div>
+
+<div id="box2" style="background-color:white">
+<form id="dmg">
+	<input type="text" id="batk" value=0><br><br>
+	<input type="text" id="ratk" value=0><br><br>
+	<input type="text" id="cd" value=50><br><br>
+	<input type="text" id="tatk" value=0><br><br>
+	<input type="text" id="tcd" value=0><br><br>
+	<input type="text" id="mult" value=0><br><br>
+	<input type="text" id="skill" value=0><br><br>
+	<input type="text" id="leader" value=0><br><br>
+	<input type="text" id="enemydef" value=800><br><br>
+	<input type="checkbox" id="atkbuff" value=0><br><br>
+	<input type="checkbox" id="defbrk" value=0><br><br>
+	<input type="checkbox" id="brand" value=800><br><br>
+	<input type="button" onclick="damagecalc()" value="Submit"><br>
+</form>
+</div>
+<p id="tot">Total attack: 0</p>
+<p id="dmgout">Damage: 0</p>
+
+</div>
+</div>
+
+<!--<form id="dmg">
+	Base Attack: <input type="text" id="batk" value=0><br>
+	Rune Attack: <input type="text" id="ratk" value=0><br>
+	Crit damage %: <input type="text" id="cd" value=0><br>
+	Tower attack %: <input type="text" id="tatk" value=0><br>
+	Tower crit damage %: <input type="text" id="tcd" value=0><br>
+	Attack multiplier %: <input type="text" id="mult" value=0><br>
+	Skillups %: <input type="text" id="skill" value=0><br>
+	Leaderskill attack %: <input type="text" id="leader" value=0><br>
+	Enemy defense: <input type="text" id="enemydef" value=800><br>
+	<input type="button" onclick="damagecalc()" value="Submit"><br><br>
+</form>-->
+
+
+<script>
+function damagecalc(){
+	var batk = document.getElementById("batk").value;
+	var ratk = document.getElementById("ratk").value;
+	var cd = document.getElementById("cd").value;
+	var tatk = document.getElementById("tatk").value;
+	var tcd = document.getElementById("tcd").value;
+	var mult = document.getElementById("mult").value;
+	var skill = document.getElementById("skill").value;
+	var leader = document.getElementById("leader").value;
+	var enemydef = document.getElementById("enemydef").value;
+	
+	var totatk = parseInt(batk) + parseInt(ratk);
+	document.getElementById("tot").innerHTML = "Total attack: " + totatk;
+	
+	if (document.getElementById("atkbuff").checked == true){
+		var finalatk = 1.5 * (parseInt(ratk) + (parseInt(batk) * (1 + (0.01 * (parseInt(tatk) + parseInt(leader))))));
+	}
+	else {
+		var finalatk = parseInt(ratk) + (parseInt(batk) * (1 + (0.01 * (parseInt(tatk) + parseInt(leader)))));
+	}
+	
+	var totdmg = finalatk * 0.01 * parseInt(mult) * (1 + (0.01 * (parseInt(skill) + parseInt(cd) + parseInt(tcd))));
+	
+	if (document.getElementById("defbrk").checked == true){
+		var dmgred = 1000/(1140 + (3.5 * parseInt(enemydef) * 0.3));
+	}
+	else {
+		var dmgred = 1000/(1140 + (3.5 * parseInt(enemydef)));
+	}
+	
+	if (document.getElementById("brand").checked == true){
+		var finaldmg = totdmg * dmgred * 1.25;
+	}
+	else {
+		var finaldmg = totdmg * dmgred;
+	}
+	
+	document.getElementById("dmgout").innerHTML = "Damage: " + finaldmg;
+}
+
+</script>
+
+
+</body>
+</html>
