@@ -1,17 +1,28 @@
 <html>
 
 <style>
+
+body{
+	
+}
+
 #outerbox {
-    overflow: hidden;
+	margin: auto;
+	width: 50%;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
 }
 
 #formbox {
     width: 500px;
 	padding: 30px;
     border: 1px solid black;
-    overflow: hidden;
-	position: fixed;
 	left: 20%;
+}
+
+.innerbox {
+	height: 20px;
+	padding: 5px;
 }
 
 #box1 {
@@ -33,35 +44,76 @@
 <!--DamageReductionFactor=1000/(1140+3.5*Defense)-->
 
 <div id="box1" style="background-color:white">
-  	Base Attack:<br><br>
-	Rune Attack:<br><br>
-	Crit damage %:<br><br>
-	Tower attack %:<br><br>
-	Tower crit damage %:<br><br>
-	Attack multiplier %:<br><br>
-	Skillups %:<br><br>
-	Leaderskill attack %:<br><br>
-	Enemy defense:<br><br><br>
-	Attack buff:<br><br>
-	Defense break:<br><br>
-	Brand:<br><br>
+  	<div class="innerbox">Damage Type:</div>
+	<div class="innerbox" id="atktypeA1">Base Attack:</div>
+	<div class="innerbox" id="atktypeA2">Rune Attack:</div>
+	<div class="innerbox" id="deftypeA1">Base Defense:</div>
+	<div class="innerbox" id="deftypeA2">Rune Defense:</div>
+	<div class="innerbox" id="spdtypeA1">Base Speed:</div>
+	<div class="innerbox" id="spdtypeA2">Rune Speed:</div>
+	<div class="innerbox" id="hptypeA1">Base HP:</div>
+	<div class="innerbox" id="hptypeA2">Rune HP:</div>
+	<div class="innerbox">Crit damage %:</div>
+	<div class="innerbox" id="atktypeA3">Tower attack %:</div>
+	<div class="innerbox" id="deftypeA3">Tower Defense %:</div>
+	<div class="innerbox" id="spdtypeA3">Tower Speed %:</div>
+	<div class="innerbox" id="hptypeA3">Tower HP %:</div>
+	<div class="innerbox">Tower crit damage %:</div>
+	<div class="innerbox" id="atktypeA4">Attack multiplier %:</div>
+	<div class="innerbox" id="deftypeA4">Defense multiplier %:</div>
+	<div class="innerbox" id="spdtypeA4">Speed multiplier %:</div>
+	<div class="innerbox" id="hptypeA4">HP multiplier %:</div>
+	<div class="innerbox">Skillups %:</div>
+	<div class="innerbox">Leaderskill %:</div>
+	<div class="innerbox">Enemy defense:</div>
+	<div class="innerbox" id="atktypeBuffA">Attack buff:</div>
+	<div class="innerbox" id="deftypeBuffA">Defense buff:</div>
+	<div class="innerbox" id="spdtypeBuffA">Speed buff:</div>
+	<div class="innerbox">Defense break:</div>
+	<div class="innerbox">Brand:</div>
 </div>
 
 <div id="box2" style="background-color:white">
 <form id="dmg">
-	<input type="text" id="batk" value=0><br><br>
-	<input type="text" id="ratk" value=0><br><br>
-	<input type="text" id="cd" value=50><br><br>
-	<input type="text" id="tatk" value=0><br><br>
-	<input type="text" id="tcd" value=0><br><br>
-	<input type="text" id="mult" value=0><br><br>
-	<input type="text" id="skill" value=0><br><br>
-	<input type="text" id="leader" value=0><br><br>
-	<input type="text" id="enemydef" value=800><br><br>
-	<input type="checkbox" id="atkbuff" value=0><br><br>
-	<input type="checkbox" id="defbrk" value=0><br><br>
-	<input type="checkbox" id="brand" value=800><br><br>
-	<input type="button" onclick="damagecalc()" value="Submit"><br>
+	<div class="innerbox" id="hideatk" style="float: right;">Hide attack stats: <input type="checkbox" id="hideatkcheck" onchange="atkuse()"></div>
+	<div class="innerbox"><select id="dmgtype" onchange="dtype()">
+		<option value="attack">Attack</option>
+		<option value="defense">Defense</option>
+		<option value="speed">Speed</option>
+		<option value="hp">HP</option>
+	</select></div>
+	<div class="innerbox" id="atktypeB1"><input type="text" id="batk" value=0></div>
+	<div class="innerbox" id="atktypeB2"><input type="text" id="ratk" value=0></div>
+	<div class="innerbox" id="deftypeB1"><input type="text" id="bdef" value=0></div>
+	<div class="innerbox" id="deftypeB2"><input type="text" id="rdef" value=0></div>
+	<div class="innerbox" id="spdtypeB1"><input type="text" id="bspd" value=0></div>
+	<div class="innerbox" id="spdtypeB2"><input type="text" id="rspd" value=0></div>
+	<div class="innerbox" id="hptypeB1"><input type="text" id="bhp" value=0></div>
+	<div class="innerbox" id="hptypeB2"><input type="text" id="rhp" value=0></div>
+	<div class="innerbox"><input type="text" id="cd" value=50></div>
+	<div class="innerbox" id="atktypeB3"><input type="text" id="tatk" value=0></div>
+	<div class="innerbox" id="deftypeB3"><input type="text" id="tdef" value=0></div>
+	<div class="innerbox" id="spdtypeB3"><input type="text" id="tspd" value=0></div>
+	<div class="innerbox" id="hptypeB3"><input type="text" id="thp" value=0></div>
+	<div class="innerbox"><input type="text" id="tcd" value=0></div>
+	<div class="innerbox" id="atktypeB4"><input type="text" id="mult" value=0></div>
+	<div class="innerbox" id="deftypeB4"><input type="text" id="dmult" value=0></div>
+	<div class="innerbox" id="spdtypeB4"><input type="text" id="smult" value=0></div>
+	<div class="innerbox" id="hptypeB4"><input type="text" id="hmult" value=0></div>
+	<div class="innerbox"><input type="text" id="skill" value=0></div>
+	<div class="innerbox"><input type="text" id="leader" value=0> <select id="leadertype">
+		<option value="attack">Attack</option>
+		<option value="defense">Defense</option>
+		<option value="speed">Speed</option>
+		<option value="hp">HP</option>
+	</select></div>
+	<div class="innerbox"><input type="text" id="enemydef" value=800></div>
+	<div class="innerbox" id="atktypeBuffB"><input type="checkbox" id="atkbuff"></div>
+	<div class="innerbox" id="deftypeBuffB"><input type="checkbox" id="defbuff"></div>
+	<div class="innerbox" id="spdtypeBuffB"><input type="checkbox" id="spdbuff"></div>
+	<div class="innerbox"><input type="checkbox" id="defbrk"></div>
+	<div class="innerbox"><input type="checkbox" id="brand"></div>
+	<div class="innerbox"><input type="button" onclick="damagecalc()" value="Submit">&nbsp;&nbsp;&nbsp;<input type="button" onclick="clearform()" value="Clear"></div>
 </form>
 </div>
 <p id="tot">Total attack: 0</p>
@@ -70,43 +122,86 @@
 </div>
 </div>
 
-<!--<form id="dmg">
-	Base Attack: <input type="text" id="batk" value=0><br>
-	Rune Attack: <input type="text" id="ratk" value=0><br>
-	Crit damage %: <input type="text" id="cd" value=0><br>
-	Tower attack %: <input type="text" id="tatk" value=0><br>
-	Tower crit damage %: <input type="text" id="tcd" value=0><br>
-	Attack multiplier %: <input type="text" id="mult" value=0><br>
-	Skillups %: <input type="text" id="skill" value=0><br>
-	Leaderskill attack %: <input type="text" id="leader" value=0><br>
-	Enemy defense: <input type="text" id="enemydef" value=800><br>
-	<input type="button" onclick="damagecalc()" value="Submit"><br><br>
-</form>-->
-
 
 <script>
+
+window.onload = dtype();
+
+window.addEventListener("load",function(){
+    document.getElementById("dmgtype").value="attack"
+	document.getElementById("leadertype").value="attack";
+	document.getElementById("hideatkcheck").checked = false;
+},false);
+
+
+function clearform(){
+
+	document.getElementById("batk").value = 0;
+	document.getElementById("ratk").value = 0;
+	document.getElementById("bdef").value = 0;
+	document.getElementById("rdef").value = 0;
+	document.getElementById("cd").value = 50;
+	document.getElementById("tatk").value = 0;
+	document.getElementById("tcd").value = 0;
+	document.getElementById("mult").value = 0;
+	document.getElementById("skill").value = 0;
+	document.getElementById("leader").value = 0;
+	document.getElementById("enemydef").value = 800;
+	
+	document.getElementById("deftypeB1").value = 0;
+	document.getElementById("deftypeB2").value = 0;
+	document.getElementById("deftypeB3").value = 0;
+	document.getElementById("deftypeB4").value = 0;
+	
+	document.getElementById("hideatkcheck").checked = false;
+	document.getElementById("defbuff").checked = false;
+	document.getElementById("atkbuff").checked = false;
+	document.getElementById("spdbuff").checked = false;
+	document.getElementById("defbrk").checked = false;
+	document.getElementById("brand").checked = false;
+	
+	document.getElementById("tot").innerHTML = "Total attack: 0";
+	document.getElementById("dmgout").innerHTML = "Damage: 0";
+
+}
+
 function damagecalc(){
-	var batk = document.getElementById("batk").value;
-	var ratk = document.getElementById("ratk").value;
+
+	var atkleader = 0;
+	var defleader = 0;
+	var spdleader = 0;
+	var hpleader = 0;
+	
+	if(document.getElementById("leadertype").value == "attack"){
+		atkleader = document.getElementById("leader").value;
+		defleader = 0;
+		spdleader = 0;
+		hpleader = 0;
+	}
+	else if(document.getElementById("leadertype").value == "defense"){
+	atkleader = 0;
+		defleader = document.getElementById("leader").value;
+		spdleader = 0;
+		hpleader = 0;
+	}
+	else if(document.getElementById("leadertype").value == "speed"){
+		atkleader = 0;
+		defleader = 0;
+		spdleader = document.getElementById("leader").value;
+		hpleader = 0;
+	}
+	else{
+		atkleader = 0;
+		defleader = 0;
+		spdleader = 0;
+		hpleader = document.getElementById("leader").value;
+	}
+	
 	var cd = document.getElementById("cd").value;
-	var tatk = document.getElementById("tatk").value;
 	var tcd = document.getElementById("tcd").value;
 	var mult = document.getElementById("mult").value;
 	var skill = document.getElementById("skill").value;
-	var leader = document.getElementById("leader").value;
 	var enemydef = document.getElementById("enemydef").value;
-	
-	var totatk = parseInt(batk) + parseInt(ratk);
-	document.getElementById("tot").innerHTML = "Total attack: " + totatk;
-	
-	if (document.getElementById("atkbuff").checked == true){
-		var finalatk = 1.5 * (parseInt(ratk) + (parseInt(batk) * (1 + (0.01 * (parseInt(tatk) + parseInt(leader))))));
-	}
-	else {
-		var finalatk = parseInt(ratk) + (parseInt(batk) * (1 + (0.01 * (parseInt(tatk) + parseInt(leader)))));
-	}
-	
-	var totdmg = finalatk * 0.01 * parseInt(mult) * (1 + (0.01 * (parseInt(skill) + parseInt(cd) + parseInt(tcd))));
 	
 	if (document.getElementById("defbrk").checked == true){
 		var dmgred = 1000/(1140 + (3.5 * parseInt(enemydef) * 0.3));
@@ -115,14 +210,289 @@ function damagecalc(){
 		var dmgred = 1000/(1140 + (3.5 * parseInt(enemydef)));
 	}
 	
-	if (document.getElementById("brand").checked == true){
-		var finaldmg = totdmg * dmgred * 1.25;
+	//Attack calculations
+	
+	function attackdmgcalc(){
+	
+		var batk = document.getElementById("batk").value;
+		var ratk = document.getElementById("ratk").value;
+		var tatk = document.getElementById("tatk").value;
+	
+		if (document.getElementById("atkbuff").checked == true){
+			var finalatk = 1.5 * (parseInt(ratk) + (parseInt(batk) * (1 + (0.01 * (parseInt(tatk) + parseInt(atkleader))))));
+		}
+		else {
+			var finalatk = parseInt(ratk) + (parseInt(batk) * (1 + (0.01 * (parseInt(tatk) + parseInt(atkleader)))));
+		}
+		
+		document.getElementById("tot").innerHTML = "Total attack: " + finalatk;
+		
+		var totatkdmg = finalatk * 0.01 * parseInt(mult) * (1 + (0.01 * (parseInt(skill) + parseInt(cd) + parseInt(tcd))));
+		
+		if (document.getElementById("brand").checked == true){
+			var finaldmg = totatkdmg * dmgred * 1.25;
+		}
+		else {
+			var finaldmg = totatkdmg * dmgred;
+		}
+		
+		return finaldmg;
+	
 	}
-	else {
-		var finaldmg = totdmg * dmgred;
+
+	if(document.getElementById("dmgtype").value == "attack"){
+		
+	
+		document.getElementById("dmgout").innerHTML = "Damage: " + Math.round(attackdmgcalc()*10000)/10000;
+	
 	}
 	
-	document.getElementById("dmgout").innerHTML = "Damage: " + finaldmg;
+	
+	//Defense calculations
+	
+	if(document.getElementById("dmgtype").value == "defense"){
+		
+		var bdef = document.getElementById("bdef").value;
+		var rdef = document.getElementById("rdef").value;
+		var tdef = document.getElementById("tdef").value;
+		var includeattack = 0;
+		
+		if (document.getElementById("hideatkcheck").checked == false){
+			includeattack = attackdmgcalc();		
+		}
+		else{
+			includeattack = 0;
+		}
+		
+		var defdmgcalc = 0;
+		
+		if (document.getElementById("defbuff").checked == true){
+			var finaldef = 1.5 * (parseInt(rdef) + (parseInt(bdef) * (1 + (0.01 * (parseInt(tdef) + parseInt(defleader))))));
+		}
+		else {
+			var finaldef = parseInt(rdef) + (parseInt(bdef) * (1 + (0.01 * (parseInt(tdef) + parseInt(defleader)))));
+		}
+		
+		document.getElementById("tot").innerHTML = "Total defense: " + finaldef;
+		
+		var totdefdmg = finaldef * 0.01 * parseInt(mult) * (1 + (0.01 * (parseInt(skill) + parseInt(cd) + parseInt(tcd))));
+		
+		if (document.getElementById("brand").checked == true){
+			var defdmgcalc = totdefdmg * dmgred * 1.25;
+		}
+		else {
+			var defdmgcalc = totdefdmg * dmgred;
+		}
+		
+		var deftotdmgcalc = includeattack + defdmgcalc;
+	
+	document.getElementById("dmgout").innerHTML = "Damage: " + Math.round(deftotdmgcalc*10000)/10000;
+	
+	}
+	
+	
+	//Defense calculations
+	
+	if(document.getElementById("dmgtype").value == "hp"){
+		
+		var bhp = document.getElementById("bhp").value;
+		var rhp = document.getElementById("rhp").value;
+		var thp = document.getElementById("thp").value;
+		var includeattack = 0;
+		
+		if (document.getElementById("hideatkcheck").checked == false){
+			includeattack = attackdmgcalc();		
+		}
+		else{
+			includeattack = 0;
+		}
+		
+		var hpdmgcalc = 0;
+		
+		var finalhp = parseInt(rhp) + (parseInt(bhp) * (1 + (0.01 * (parseInt(thp) + parseInt(hpleader)))));
+		
+		document.getElementById("tot").innerHTML = "Total hp: " + finalhp;
+		
+		var tothpdmg = finalhp * 0.01 * parseInt(mult) * (1 + (0.01 * (parseInt(skill) + parseInt(cd) + parseInt(tcd))));
+		
+		if (document.getElementById("brand").checked == true){
+			var hpdmgcalc = tothpdmg * dmgred * 1.25;
+		}
+		else {
+			var hpdmgcalc = tothpdmg * dmgred;
+		}
+		
+		var hptotdmgcalc = includeattack + hpdmgcalc;
+	
+	document.getElementById("dmgout").innerHTML = "Damage: " + Math.round(hptotdmgcalc*10000)/10000;
+	
+	}
+	
+}
+
+function atkuse(){
+
+	if (document.getElementById("hideatkcheck").checked == true){
+		
+		document.getElementById("atktypeA1").style.display = "none";
+		document.getElementById("atktypeA2").style.display = "none";
+		document.getElementById("atktypeA3").style.display = "none";
+		document.getElementById("atktypeA4").style.display = "none";
+		document.getElementById("atktypeBuffA").style.display = "none";
+		document.getElementById("atktypeB1").style.display = "none";
+		document.getElementById("atktypeB2").style.display = "none";
+		document.getElementById("atktypeB3").style.display = "none";
+		document.getElementById("atktypeB4").style.display = "none";
+		document.getElementById("atktypeBuffB").style.display = "none";
+	}
+
+	else{
+
+		document.getElementById("atktypeA1").style.display = "block";
+		document.getElementById("atktypeA2").style.display = "block";
+		document.getElementById("atktypeA3").style.display = "block";
+		document.getElementById("atktypeA4").style.display = "block";
+		document.getElementById("atktypeBuffA").style.display = "block";
+		document.getElementById("atktypeB1").style.display = "block";
+		document.getElementById("atktypeB2").style.display = "block";
+		document.getElementById("atktypeB3").style.display = "block";
+		document.getElementById("atktypeB4").style.display = "block";
+		document.getElementById("atktypeBuffB").style.display = "block";
+	}
+
+}
+
+function hidedef(){
+
+	document.getElementById("deftypeA1").style.display = "none";
+	document.getElementById("deftypeA2").style.display = "none";
+	document.getElementById("deftypeA3").style.display = "none";
+	document.getElementById("deftypeA4").style.display = "none";
+	document.getElementById("deftypeBuffA").style.display = "none";
+	document.getElementById("deftypeB1").style.display = "none";
+	document.getElementById("deftypeB2").style.display = "none";
+	document.getElementById("deftypeB3").style.display = "none";
+	document.getElementById("deftypeB4").style.display = "none";
+	document.getElementById("deftypeBuffB").style.display = "none";
+
+}
+
+function showdef(){
+
+	document.getElementById("deftypeA1").style.display = "block";
+	document.getElementById("deftypeA2").style.display = "block";
+	document.getElementById("deftypeA3").style.display = "block";
+	document.getElementById("deftypeA4").style.display = "block";
+	document.getElementById("deftypeBuffA").style.display = "block";
+	document.getElementById("deftypeB1").style.display = "block";
+	document.getElementById("deftypeB2").style.display = "block";
+	document.getElementById("deftypeB3").style.display = "block";
+	document.getElementById("deftypeB4").style.display = "block";
+	document.getElementById("deftypeBuffB").style.display = "block";
+		
+}
+
+function hidespd(){
+
+	document.getElementById("spdtypeA1").style.display = "none";
+	document.getElementById("spdtypeA2").style.display = "none";
+	document.getElementById("spdtypeA3").style.display = "none";
+	document.getElementById("spdtypeA4").style.display = "none";
+	document.getElementById("spdtypeBuffA").style.display = "none";
+	document.getElementById("spdtypeB1").style.display = "none";
+	document.getElementById("spdtypeB2").style.display = "none";
+	document.getElementById("spdtypeB3").style.display = "none";
+	document.getElementById("spdtypeB4").style.display = "none";
+	document.getElementById("spdtypeBuffB").style.display = "none";
+
+}
+
+function showspd(){
+
+	document.getElementById("spdtypeA1").style.display = "block";
+	document.getElementById("spdtypeA2").style.display = "block";
+	document.getElementById("spdtypeA3").style.display = "block";
+	document.getElementById("spdtypeA4").style.display = "block";
+	document.getElementById("spdtypeBuffA").style.display = "block";
+	document.getElementById("spdtypeB1").style.display = "block";
+	document.getElementById("spdtypeB2").style.display = "block";
+	document.getElementById("spdtypeB3").style.display = "block";
+	document.getElementById("spdtypeB4").style.display = "block";
+	document.getElementById("spdtypeBuffB").style.display = "block";
+		
+}
+
+function hidehp(){
+
+	document.getElementById("hptypeA1").style.display = "none";
+	document.getElementById("hptypeA2").style.display = "none";
+	document.getElementById("hptypeA3").style.display = "none";
+	document.getElementById("hptypeA4").style.display = "none";
+	document.getElementById("hptypeB1").style.display = "none";
+	document.getElementById("hptypeB2").style.display = "none";
+	document.getElementById("hptypeB3").style.display = "none";
+	document.getElementById("hptypeB4").style.display = "none";
+
+}
+
+function showhp(){
+
+	document.getElementById("hptypeA1").style.display = "block";
+	document.getElementById("hptypeA2").style.display = "block";
+	document.getElementById("hptypeA3").style.display = "block";
+	document.getElementById("hptypeA4").style.display = "block";
+	document.getElementById("hptypeB1").style.display = "block";
+	document.getElementById("hptypeB2").style.display = "block";
+	document.getElementById("hptypeB3").style.display = "block";
+	document.getElementById("hptypeB4").style.display = "block";
+		
+}
+
+function dtype(){
+
+	if(document.getElementById("dmgtype").value == "attack"){
+		
+		document.getElementById("hideatkcheck").checked = false;
+		document.getElementById("hideatk").style.display = "none";
+		document.getElementById("leadertype").value = "attack";
+		document.getElementById("tot").innerHTML = "Total attack: 0";
+		atkuse();
+		hidedef();
+		hidespd();
+		hidehp();
+	
+	}
+	else if(document.getElementById('dmgtype').value == "defense"){
+		
+		document.getElementById("hideatk").style.display = "block";
+		document.getElementById("leadertype").value = "defense";
+		document.getElementById("tot").innerHTML = "Total defense: 0";
+		showdef();
+		hidespd();
+		hidehp();
+	
+	}
+	else if(document.getElementById('dmgtype').value == "speed"){
+		
+		document.getElementById("hideatk").style.display = "block";
+		document.getElementById("leadertype").value = "speed";
+		document.getElementById("tot").innerHTML = "Total speed: 0";
+		hidedef();
+		showspd();
+		hidehp();
+	
+	}
+	else{
+		
+		document.getElementById("hideatk").style.display = "block";
+		document.getElementById("leadertype").value = "hp";
+		document.getElementById("tot").innerHTML = "Total HP: 0";
+		hidedef();
+		hidespd();
+		showhp();
+	
+	}
+
 }
 
 </script>
